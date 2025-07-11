@@ -1,15 +1,22 @@
+///Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+/// MEDIUM
+/// Time:O(n^2logn) Space:(n)
+/// In first glance,it is hard to tell that we should sort the words.
+/// When words sorted inside themselves,anagram words will be transformed into same char sequences.
+/// In that way we can have a hashmap that maps the anagrams to the same places.
+/// ACCEPTED.
 import java.util.*;
 
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         String[] sortedStrings = new String[strs.length];
         
-        // Her string'i sortla
+        
         for (int i = 0; i < strs.length; i++) {
             sortedStrings[i] = sortString(strs[i]);
         }
         
-        // HashMap oluştur
+        
         HashMap<String, LinkedList<String>> dict = new HashMap<>();
         
         for (int i = 0; i < sortedStrings.length; i++) {
@@ -20,11 +27,11 @@ class Solution {
             } else {
                 LinkedList<String> anagramList = dict.get(sortedStrings[i]);
                 anagramList.add(strs[i]);
-                // dict.put(sortedStrings[i], anagramList); // Bu satır gereksiz
+                
             }
         }
         
-        // Sonucu oluştur
+        
         List<List<String>> groupAnagrams = new ArrayList<>();
         for (LinkedList<String> anagramList : dict.values()) {
             groupAnagrams.add(anagramList);
